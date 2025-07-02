@@ -1,3 +1,10 @@
+#How to Run This in Supabase:
+
+#Go to Supabase Dashboard → SQL Editor → New Query
+#Paste the above SQL
+#Run query
+
+  
 -- Users: Supabase Auth handles users automatically.
 
 -- Meals Table
