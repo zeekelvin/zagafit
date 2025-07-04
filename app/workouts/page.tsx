@@ -1,44 +1,42 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import Link from 'next/link';
+
+const workouts = [
+  {
+    id: 'hiit',
+    title: 'HIIT Blast',
+    description: 'Full body high-intensity circuit',
+    image: 'https://i.imgur.com/2nCt3Sbl.jpg',
+  },
+  {
+    id: 'core',
+    title: 'Core Crusher',
+    description: 'Abs & core strength routine',
+    image: 'https://i.imgur.com/fRXgJ9Bl.jpg',
+  },
+  {
+    id: 'upper',
+    title: 'Upper Body Sculpt',
+    description: 'Pushups, dumbbell presses & arms',
+    image: 'https://i.imgur.com/XOKdhSl.jpg',
+  },
+];
 
 export default function WorkoutsPage() {
-  const [workouts, setWorkouts] = useState<any[]>([]);
-  const [newWorkout, setNewWorkout] = useState('');
-
-  const fetchWorkouts = async () => {
-    const { data } = await supabase.from('workouts').select('*');
-    setWorkouts(data || []);
-  };
-
-  const addWorkout = async () => {
-    if (!newWorkout) return;
-    await supabase.from('workouts').insert([{ name: newWorkout }]);
-    setNewWorkout('');
-    fetchWorkouts();
-  };
-
-  useEffect(() => {
-    fetchWorkouts();
-  }, []);
-
   return (
-    <div className="p-6 text-primary bg-background min-h-screen">
-      <h2 className="text-2xl mb-4">Workouts Log</h2>
-      <input
-        value={newWorkout}
-        onChange={(e) => setNewWorkout(e.target.value)}
-        placeholder="Add a workout"
-        className="p-2 rounded bg-white text-black mb-2"
-      />
-      <button onClick={addWorkout} className="bg-primary text-black px-4 py-2 rounded mb-4">
-        Add Workout
-      </button>
-      <ul>
+    <div className="p-6 bg-black text-yellow-400 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">🏋️ Choose a Workout</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {workouts.map((workout) => (
-          <li key={workout.id}>{workout.name}</li>
+          <Link href={`/workouts/${workout.id}`} key={workout.id}>
+            <div className="bg-yellow-400 text-black p-4 rounded cursor-pointer hover:scale-105 transition">
+              <img src={workout.image} alt={workout.title} className="rounded mb-3 w-full h-48 object-cover" />
+              <h2 className="text-xl font-bold">{workout.title}</h2>
+              <p>{workout.description}</p>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

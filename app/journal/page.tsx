@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../../lib/supabaseClient'; // if one level deep
 
 export default function JournalPage() {
   const [entries, setEntries] = useState<any[]>([]);
