@@ -1,0 +1,24 @@
+'use client';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+
+const days = Array.from({ length: 7 }, (_, i) => i + 1);
+
+export default function PlanDetailPage() {
+  const { id } = useParams();
+
+  return (
+    <div className="p-6 bg-black text-yellow-400 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">📆 {id?.toString().replace(/-/g, ' ')} Plan</h1>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {days.map((day) => (
+          <Link key={day} href={`/plans/${id}/day/${day}`}>
+            <div className="bg-yellow-400 text-black text-center p-6 rounded hover:bg-yellow-300 cursor-pointer">
+              <h2 className="text-xl font-bold">Day {day}</h2>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}

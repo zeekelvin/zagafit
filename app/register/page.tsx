@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { supabase } from '../../lib/supabaseClient'; // if one level deep
 import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
