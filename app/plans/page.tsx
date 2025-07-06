@@ -1,3 +1,4 @@
+// ✅ /app/plans/page.tsx
 'use client';
 import Link from 'next/link';
 
@@ -8,6 +9,8 @@ const plans = [
     description: 'A gentle intro to get moving, daily for 1 week.',
     image: '/images/zagafit-beginner.png',
     duration: 7,
+    completed: 3,
+    exercises: ['Jumping Jacks', 'Push-ups', 'Plank'],
   },
   {
     id: 'zaga-fatburn-21',
@@ -15,6 +18,8 @@ const plans = [
     description: 'Fat-melting HIIT, cardio, and core workouts.',
     image: '/images/zagafit-fatburn.png',
     duration: 21,
+    completed: 12,
+    exercises: ['Mountain Climbers', 'Burpees', 'High Knees'],
   },
   {
     id: 'zaga-strength-30',
@@ -22,6 +27,8 @@ const plans = [
     description: 'Strength-based split with rest days built in.',
     image: '/images/zagafit-strength.png',
     duration: 30,
+    completed: 6,
+    exercises: ['Squats', 'Deadlifts', 'Push Press'],
   },
 ];
 
@@ -41,12 +48,14 @@ export default function PlansPage() {
                 <img
                   src={plan.image}
                   alt={plan.title}
-                  className="w-full h-auto max-h-64 object-contain rounded-t-xl"
+                  className="w-full h-64 object-contain rounded-t-xl"
                 />
                 <div className="p-5">
                   <h2 className="text-xl font-bold text-yellow-400 mb-2">{plan.title}</h2>
                   <p className="text-gray-300 text-sm">{plan.description}</p>
                   <p className="text-gray-400 text-xs mt-2">Duration: {plan.duration} Days</p>
+                  <p className="text-green-400 text-xs">✅ {plan.completed} / {plan.duration} Days Completed</p>
+                  <p className="text-blue-400 text-xs mt-1">Exercises: {plan.exercises.join(', ')}</p>
                 </div>
               </div>
             </Link>
